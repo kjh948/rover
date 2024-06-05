@@ -1,7 +1,7 @@
-from wave_rover_serial import Robot
+from robot import Robot
 
 # Initialize the Robot with the appropriate serial port and baud rate
-robot = Robot('/dev/ttyUSB0')
+robot = Robot('/dev/ttyUSB1')
 
 # Connect to the robot
 robot.connect()

@@ -15,7 +15,7 @@ def main():
 
     args = parser.parse_args()
 
-    ser = serial.Serial(args.port, baudrate=115200, dsrdtr=None)
+    ser = serial.Serial(args.port, baudrate=1000000, dsrdtr=None)
     ser.setRTS(False)
     ser.setDTR(False)
 

@@ -9,9 +9,6 @@ import json
 import time
 from robot import Robot
 
-ROVER_SERIAL_PORT = '/dev/ttyUSB1'
-ROVER_BAUD_RATE = 1000000
-
 def cmd_callback(msg):
     """Extract linear.x and angular.z from Twist msg."""
     cmd_vel_x = msg.linear.x  # meters/sec
@@ -33,13 +30,17 @@ def cmd_callback(msg):
     rover_conn.speed_input(left_speed=l*100, right_speed=r*100)
 
 
+    #ina219_info
+
 
 def control():    
     rospy.init_node('base', anonymous=True)    
     rospy.Subscriber("/cmd_vel", Twist, cmd_callback)
 
+    port_name = rospy.get_param('~port','/dev/ttyUSB0')
+
     global rover_conn
-    rover_conn = Robot(ROVER_SERIAL_PORT)
+    rover_conn = Robot(port_name)
     rover_conn.connect()
     rospy.loginfo("mcu was initialized and ready now")
 

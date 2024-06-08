@@ -22,7 +22,7 @@
   <!-- Use libpointmatcher for ICP? (has effect only when hector:=false) -->
   <arg name="pm" default="true" />
 
-  <param name="use_sim_time" type="bool" value="True"/>
+  <param name="use_sim_time" type="bool" value="false"/>
 
   <node if="$(arg hector)" pkg="tf" type="static_transform_publisher" name="scanmatcher_to_base_footprint"
     args="0.0 0.0 0.0 0.0 0.0 0.0 /scanmatcher_frame /base_footprint 100" />
@@ -38,7 +38,7 @@
 
     <!-- Tf use -->
     <param name="pub_map_odom_transform" value="true"/>
-    <param name="pub_map_scanmatch_transform" value="true"/>
+    <param name="pub_map_scanmatch_transform" value="false"/>
     <param name="pub_odometry" value="true"/>
 
     <!-- Map size / start point -->
@@ -60,7 +60,7 @@
   <!-- If argument "hector" is false, we use rtabmap's icp odometry to generate odometry for us -->
   <node unless="$(arg hector)" pkg="rtabmap_ros" type="icp_odometry" name="icp_odometry" output="screen" >
      <remap from="scan"      to="/scan"/>
-     <remap from="odom"      to="/scanmatch_odom"/>
+     <remap from="odom"      to="/scanmatcher_frame"/>
      <remap from="odom_info"      to="/rtabmap/odom_info"/>
 
      <param name="frame_id"        type="string" value="base_footprint"/>
@@ -97,8 +97,7 @@
       <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
       <param name="rgb/image_transport"   type="string" value="raw"/>
       <param name="depth/image_transport" type="string" value="raw"/>
-      <param name="approx_sync"     type="bool"   value="false"/>
-      
+      <param name="approx_sync"     type="bool"   value="true"/>
     </node>
 
     <!-- SLAM -->

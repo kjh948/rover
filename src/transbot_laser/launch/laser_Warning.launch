@@ -1,0 +1,3 @@
+<launch>
+    <node name='laser_Warning' pkg="transbot_laser" type="laser_Warning.py" required="true" output="screen"/>
+</launch>

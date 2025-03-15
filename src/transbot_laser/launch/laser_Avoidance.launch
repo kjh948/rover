@@ -1,0 +1,3 @@
+<launch>
+    <node name='laser_Avoidance' pkg="transbot_laser" type="laser_Avoidance.py" required="true" output="screen"/>
+</launch>

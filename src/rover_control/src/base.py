@@ -29,14 +29,18 @@ def cmd_callback(msg):
     min_vel = 0.1
     max_vel = 1.0
     
-    angular_scale = 2.0
-    l = cmd_vel_x - angular_scale * cmd_vel_z
-    r = cmd_vel_x + angular_scale * cmd_vel_z
+    angular_scale = 1.2
+    pwm_scale = 196.0
+    l = (cmd_vel_x - angular_scale * cmd_vel_z)*pwm_scale
+    r = (cmd_vel_x + angular_scale * cmd_vel_z)*pwm_scale
+
+    l = min(255,l)
+    r = min(255,r)
 
     rospy.loginfo("pwm l="+str(l)+"  "+"pwm r="+str(r))
 
     global rover_conn
-    rover_conn.speed_input(left_speed=l*100, right_speed=r*100)
+    rover_conn.speed_input(left_speed=l, right_speed=r)
 
 
     # print(rover_conn.ina219_info())

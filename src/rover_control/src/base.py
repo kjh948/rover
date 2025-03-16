@@ -17,6 +17,14 @@ pub_temperature = rospy.Publisher('/cpu_temperature', Float32, queue_size=10)
 pub_imu = rospy.Publisher('/imu_raw', Imu, queue_size=10)
 pub_battery = rospy.Publisher('/battery', Float32, queue_size=10)
 
+def map_pwm(pwm, min, max):
+    val = (max-min)*abs(pwm) + min
+    if(pwm>0):
+        return val
+    elif (pwm<0):
+        return -val
+    else:
+        return 0
 
 def cmd_callback(msg):
     """Extract linear.x and angular.z from Twist msg."""
@@ -31,11 +39,12 @@ def cmd_callback(msg):
     
     angular_scale = 1.2
     pwm_scale = 196.0
-    l = (cmd_vel_x - angular_scale * cmd_vel_z)*pwm_scale
-    r = (cmd_vel_x + angular_scale * cmd_vel_z)*pwm_scale
-
-    l = min(255,l)
-    r = min(255,r)
+    pwm_min = 40
+    pwm_max = 255
+    l = (cmd_vel_x - cmd_vel_z)/2.
+    r = (cmd_vel_x + cmd_vel_z)/2.
+    l = map_pwm(l, pwm_min, pwm_max)
+    r = map_pwm(r, pwm_min, pwm_max)
 
     rospy.loginfo("pwm l="+str(l)+"  "+"pwm r="+str(r))
 

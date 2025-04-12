@@ -6,8 +6,9 @@ E-mail: kint.zhao@slamtec.com
 
 <launch>
     <arg name="scan_topic" default="scan"/>
-    <arg name="base_frame" default="odom"/>
-    <arg name="odom_frame" value="odom"/>
+    <!-- KJH -->
+    <arg name="base_frame" default="base_link"/> 
+    <arg name="odom_frame" value="base_link"/>
     <arg name="map_frame" value="map"/>
     <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
         <remap from="scan" to="$(arg scan_topic)"/>

@@ -39,7 +39,7 @@ def cmd_callback(msg):
     
     angular_scale = 1.2
     pwm_scale = 196.0
-    pwm_min = 40
+    pwm_min = 80
     pwm_max = 255
     l = (cmd_vel_x - cmd_vel_z)/2.
     r = (cmd_vel_x + cmd_vel_z)/2.

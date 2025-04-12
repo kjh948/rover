@@ -2,10 +2,10 @@ DWAPlannerROS:
   # Robot Configuration Parameters
   # x方向最大线速度绝对值，单位:米/秒
   # The maximum y velocity for the robot in m/s
-  max_vel_x: 0.4
+  max_vel_x: 1.0
   # x方向最小线速度绝对值，负数代表可后退，单位:米/秒
   # The minimum x velocity for the robot in m/s, negative for backwards motion.
-  min_vel_x: 0.01
+  min_vel_x: 0.8
   # y方向最大线速度绝对值，单位:米/秒。差速机器人为0
   # The maximum y velocity for the robot in m/s
   max_vel_y: 0.0
@@ -17,7 +17,7 @@ DWAPlannerROS:
   max_rot_vel: 2.0
   # 机器人最小旋转速度的绝对值，单位为 rad/s
   # The absolute value of the minimum rotational velocity for the robot in rad/s
-  min_rot_vel: 2.0
+  min_rot_vel: 1.0
   # 机器人最大平移速度的绝对值，单位为 m/s
   # The absolute value of the maximum translational velocity for the robot in m/s
   max_vel_trans: 0.4

@@ -1,0 +1,16 @@
+<launch>
+    <!-- Start ROS communication between the robot's computer and Linorobot base -->
+    <node pkg="rover_control" name="rover_control" type="base.py" output="screen">
+        <param name="port" value="/dev/ttyUSB0" />
+    </node>
+
+    <!-- Publish static transform from base_footprint to base_link -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_footprint_to_base_link" args="0 0 0.098 0 0 0  /base_footprint /base_link"/>
+
+    <!-- Astra Pro -->
+    <include file="$(find astra_camera)/launch/astra_pro.launch" />
+
+    <!-- depth2laser -->
+    <include file="$(find rover_control)/launch/depth2laser.launch" />
+
+</launch>

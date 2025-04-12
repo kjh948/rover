@@ -365,3 +365,11 @@ class Robot:
         """
         command = {"T": 905}
         self.send_command(command)
+
+
+if __name__ == '__main__':
+
+    try:
+        node()
+    except KeyboardInterrupt:
+        pass
